@@ -1,6 +1,10 @@
-# silly_portfolio
+# Silly Personal Website
 
-A new Flutter project.
+A new Flutter project to do silly things and create a silly personal website or portfolio site.
+
+Inspirations for silly face from this talk by [Filip Hracek](https://youtu.be/tA8f7v-seE8)
+
+Deployed GitHub Pages site available [here](https://shakyacsun.github.io/silly_portfolio_flutter/)
 
 ## Getting Started
 
