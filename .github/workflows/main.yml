@@ -32,8 +32,8 @@ jobs:
           channel: beta
       - run: flutter config --enable-web
       - run: flutter pub get
-      - run: flutter test
-      - run: flutter build web
+#       - run: flutter test
+      - run: flutter build web --release
 
 
       # Runs a set of commands using the runners shell
