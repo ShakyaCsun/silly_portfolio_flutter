@@ -30,14 +30,19 @@ jobs:
       - uses: subosito/flutter-action@v1
         with:
           channel: beta
-      - run: flutter config --enable-web
-      - run: flutter pub get
+      - name: Enable Flutter for Web
+        run: flutter config --enable-web
+      - name: Install Dependencies
+        run: flutter pub get
 #       - run: flutter test
-      - run: flutter build web --release
+      # Populates the `build/web` folder
+      - name: Generate a release build for Web
+        run: flutter build web
 
 
-      # Runs a set of commands using the runners shell
-      - run: |
+    
+      - name: Push `build/web` folder to branch gh-pages
+        run: |
           cd build/web
           git init
           
