@@ -38,14 +38,16 @@ jobs:
       # Populates the `build/web` folder
       - name: Generate a release build for Web
         run: flutter build web
+      
+      - name: Switch to `build/web`
+        run: cd build/web
 
-
-    
-      - name: Push `build/web` folder to branch gh-pages
+      - name: Replace base href to correct destination
+        run: sed -i 's+<base href="/">+<base href="/silly_portfolio_flutter/">+g' index.html
+        
+      - name: Git commands to push `build/web` folder to branch gh-pages
         run: |
-          cd build/web
           git init
-          
           git config --local user.email "csunshakya@gmail.com"
           git config --local user.name "ShakyaCsun's GitHub Action"
           git remote add origin https://${{secrets.commit_token}}@github.com/ShakyaCsun/silly_portfolio_flutter.git
