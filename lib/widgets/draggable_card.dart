@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
 import 'package:silly_portfolio/utils/custom_curve.dart';
 
-/// A draggable card that moves back to [Alignment.center] when it's
+/// A draggable widget that moves back to [alignment] when it's
 /// released.
 /// [Cookbook](https://flutter.dev/docs/cookbook/animation/physics-simulation)
 class DraggableCard extends StatefulWidget {
   const DraggableCard({
     Key? key,
     required this.child,
+    this.onDragEnd,
+    this.duration = const Duration(milliseconds: 500),
     this.alignment = Alignment.topCenter,
   }) : super(key: key);
   final Widget child;
+
+  /// Custom Optional callback for when the user stops dragging the Widget
+  final VoidCallback? onDragEnd;
   final Alignment alignment;
+  final Duration duration;
 
   @override
   _DraggableCardState createState() => _DraggableCardState();
@@ -51,7 +57,7 @@ class _DraggableCardState extends State<DraggableCard>
     super.initState();
     _dragAlignment = widget.alignment;
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 2000),
+      duration: widget.duration,
       vsync: this,
     );
 
@@ -91,6 +97,7 @@ class _DraggableCardState extends State<DraggableCard>
             });
           },
           onPanEnd: (_) {
+            widget.onDragEnd?.call();
             _runAnimation(_dragAlignment);
           },
           child: Align(

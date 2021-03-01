@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:silly_portfolio/speech_constants.dart';
+import 'package:silly_portfolio/home/home.dart';
 import 'package:silly_portfolio/widgets/widgets.dart';
 
 class SillyFace extends StatelessWidget {
@@ -24,7 +27,8 @@ class SillyFace extends StatelessWidget {
           Expanded(
             flex: 2,
             child: DraggableCard(
-              alignment: Alignment.topCenter,
+              onDragEnd: context.read<SpeechTextCubit>().nextSpeechText,
+              duration: speechDuration,
               child: Image.asset(
                 'images/bottom.png',
                 width: imageWidth,
