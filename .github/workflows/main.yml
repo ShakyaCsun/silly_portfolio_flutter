@@ -25,25 +25,20 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v2
         with:
-          channel: beta
-      - name: Enable Flutter for Web
-        run: flutter config --enable-web
+          channel: stable
+
+      - id: commit
+        uses: pr-mpt/actions-commit-hash@v1
+
       - name: Install Dependencies
         run: flutter pub get
-      #       - run: flutter test
-      # Populates the `build/web` folder
+
       - name: Generate a release build for Web
-        run: flutter build web
-
-      # - name: Switch to `build/web`
-      #   run: cd build/web
-
-      - name: Replace base href to correct destination
-        run: sed -i 's+<base href="/">+<base href="/silly_portfolio_flutter/">+g' ./build/web/index.html
+        run: flutter build web --base-href /silly_portfolio_flutter/
 
       - name: Git commands to push `build/web` folder to branch gh-pages
         run: |
@@ -54,5 +49,5 @@ jobs:
           git remote add origin https://${{secrets.commit_token}}@github.com/ShakyaCsun/silly_portfolio_flutter.git
           git checkout -b gh-pages
           git add .
-          git commit -m "New update"
+          git commit -m "New update: ${{ steps.commit.outputs.short }}"
           git push origin gh-pages -f
