@@ -7,12 +7,12 @@ import 'package:silly_portfolio/utils/custom_curve.dart';
 /// [Cookbook](https://flutter.dev/docs/cookbook/animation/physics-simulation)
 class DraggableCard extends StatefulWidget {
   const DraggableCard({
-    Key? key,
+    super.key,
     required this.child,
     this.onDragEnd,
     this.duration = const Duration(milliseconds: 500),
     this.alignment = Alignment.topCenter,
-  }) : super(key: key);
+  });
   final Widget child;
 
   /// Custom Optional callback for when the user stops dragging the Widget
@@ -21,7 +21,7 @@ class DraggableCard extends StatefulWidget {
   final Duration duration;
 
   @override
-  _DraggableCardState createState() => _DraggableCardState();
+  State<DraggableCard> createState() => _DraggableCardState();
 }
 
 class _DraggableCardState extends State<DraggableCard>
@@ -92,7 +92,7 @@ class _DraggableCardState extends State<DraggableCard>
                 details.delta.dy / (constraints.maxHeight / 2),
               );
               if (_dragAlignment.y < -1.0) {
-                _dragAlignment = Alignment(_dragAlignment.x, -1.0);
+                _dragAlignment = Alignment(_dragAlignment.x, -1);
               }
             });
           },

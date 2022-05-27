@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:silly_portfolio/speech_constants.dart';
 import 'package:silly_portfolio/home/home.dart';
+import 'package:silly_portfolio/speech_constants.dart';
 
 class AnimatedSpeechText extends StatelessWidget {
   const AnimatedSpeechText({
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -25,25 +25,27 @@ class AnimatedSpeechText extends StatelessWidget {
 
 class TyperAnimatedText extends StatefulWidget {
   const TyperAnimatedText({
-    Key? key,
+    super.key,
     required this.text,
     this.duration = const Duration(milliseconds: 500),
     this.textStyle,
     this.textAlign = TextAlign.center,
-  }) : super(key: key);
+  });
 
   final String text;
   final Duration duration;
   final TextAlign textAlign;
   final TextStyle? textStyle;
+
   @override
-  _TyperAnimatedTextState createState() => _TyperAnimatedTextState();
+  State<TyperAnimatedText> createState() => _TyperAnimatedTextState();
 }
 
 class _TyperAnimatedTextState extends State<TyperAnimatedText>
     with SingleTickerProviderStateMixin {
   late final Animation<int> _increasingCharacterCountAnim;
   late final AnimationController _controller;
+
   @override
   void initState() {
     super.initState();

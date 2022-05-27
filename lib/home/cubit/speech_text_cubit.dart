@@ -4,10 +4,11 @@ import 'package:bloc/bloc.dart';
 
 class SpeechTextCubit extends Cubit<String> {
   SpeechTextCubit(List<String> speechTexts)
-      : assert(speechTexts.isNotEmpty),
+      : assert(speechTexts.isNotEmpty, 'List of Speech Texts cannot be empty'),
         _speechTexts = UnmodifiableListView(speechTexts),
         _numberOfSpeechTexts = speechTexts.length,
         super(speechTexts.first);
+
   final UnmodifiableListView<String> _speechTexts;
   final int _numberOfSpeechTexts;
   int _currentIndex = 0;
